@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	gogpt "github.com/sashabaranov/go-gpt3"
 	"log"
+
+	gogpt "github.com/sashabaranov/go-gpt3"
 
 	"github.com/index-labs/pipelang/pkg/llms/openai"
 )

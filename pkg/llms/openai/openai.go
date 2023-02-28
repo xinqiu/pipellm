@@ -3,15 +3,17 @@ package openai
 import (
 	"context"
 	"fmt"
-	"github.com/index-labs/pipelang/pkg/llms"
 	"os"
 	"strings"
+
+	"github.com/index-labs/pipelang/pkg/llms"
 
 	constantOpenAI "github.com/index-labs/pipelang/pkg/constants"
 	"github.com/index-labs/pipelang/pkg/types"
 	gogpt "github.com/sashabaranov/go-gpt3"
 )
 
+// LLM OpenAI implementation
 type LLM struct {
 	// ========== LLM Client ===========
 	client *gogpt.Client
@@ -37,7 +39,7 @@ type LLM struct {
 	// modelKwargs Holds any model parameters valid for `create` call not explicitly specified.
 	modelKwargs map[string]interface{}
 	// openaiApiKey
-	openaiApiKey string
+	openaiAPIKey string
 	// batchSize Batch size to use when passing multiple documents to generate.
 	batchSize int
 	// requestTimeout Timeout for requests to OpenAI completion API. Default is 600 seconds.
@@ -50,6 +52,12 @@ type LLM struct {
 	streaming bool
 }
 
+// ModelName is the name of the model
+func (receiver *LLM) ModelName() string {
+	return "OpenAI"
+}
+
+// Call is the method to call OpenAI
 func (receiver *LLM) Call(ctx context.Context, prompt string) (string, error) {
 	result, err := receiver.Generate(ctx, []string{prompt})
 	if err != nil {
@@ -60,8 +68,8 @@ func (receiver *LLM) Call(ctx context.Context, prompt string) (string, error) {
 	return result.Generations[0].Text, nil
 }
 
+// Generate OpenAI implementation
 func (receiver *LLM) Generate(ctx context.Context, prompts []string) (*llms.LLMResult, error) {
-
 	if receiver.streaming {
 		// TODO: not support streaming now
 		return nil, types.ErrNotImplemented
@@ -84,11 +92,10 @@ func (receiver *LLM) Generate(ctx context.Context, prompts []string) (*llms.LLMR
 		return nil, types.ErrOpenAIResponse
 	}
 
-	return receiver.CreateLLMResult(ctx, &resp), nil
+	return receiver.createLLMResult(ctx, &resp), nil
 }
 
-func (receiver *LLM) CreateLLMResult(ctx context.Context, response *gogpt.CompletionResponse) *llms.LLMResult {
-
+func (receiver *LLM) createLLMResult(ctx context.Context, response *gogpt.CompletionResponse) *llms.LLMResult {
 	generatons := make([]*llms.Generation, 0)
 
 	for _, choice := range response.Choices {
@@ -107,13 +114,14 @@ func (receiver *LLM) CreateLLMResult(ctx context.Context, response *gogpt.Comple
 	}
 }
 
+// New return a new LLM client
 func New(ctx context.Context) (*LLM, error) {
 	apiKey := os.Getenv(constantOpenAI.OsEnvAPIKey)
 	if apiKey == "" {
 		return nil, types.ErrNoAPIKey
 	}
 	client := gogpt.NewClient(apiKey)
-	llm := &LLM{client: client, openaiApiKey: apiKey}
+	llm := &LLM{client: client, openaiAPIKey: apiKey}
 
 	// init default parameters
 	llm.buildDefaultModelParams(ctx)
@@ -136,16 +144,19 @@ func (receiver *LLM) buildDefaultModelParams(ctx context.Context) {
 	receiver.streaming = false
 }
 
+// WithModelName add model name to receiver
 func (receiver *LLM) WithModelName(modelName string) *LLM {
 	receiver.modelName = modelName
 	return receiver
 }
 
+// WithTemperature add temperature to receiver
 func (receiver *LLM) WithTemperature(temperature float32) *LLM {
 	receiver.temperature = temperature
 	return receiver
 }
 
+// WithMaxTokens add maxTokens to receiver
 func (receiver *LLM) WithMaxTokens(maxTokens int) *LLM {
 	receiver.maxTokens = maxTokens
 	return receiver

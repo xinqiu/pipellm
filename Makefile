@@ -19,7 +19,7 @@ fmt:
 	gofumpt -l -w -extra .
 
 deps:
-	go get golang.org/x/lint/golint
+	go install golang.org/x/lint/golint
 
 lint: deps
 	golint ./...
