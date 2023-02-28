@@ -9,4 +9,6 @@ var (
 	ErrNoAPIKey = errors.New("no API key")
 	// ErrNotImplemented not implemented
 	ErrNotImplemented = errors.New("not implemented")
+	// ErrOnlySupportOneArg `Run` supports only one positional argument
+	ErrOnlySupportOneArg = errors.New("`Run` supports only one positional argument")
 )

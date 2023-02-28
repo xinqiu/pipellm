@@ -11,4 +11,5 @@ type BasePrompt interface {
 type Prompt interface {
 	BasePrompt
 	Format(ctx context.Context, inputVars map[string]string) string
+	InputVars(ctx context.Context) []string
 }

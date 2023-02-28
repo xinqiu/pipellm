@@ -9,6 +9,7 @@ import (
 
 // PromptTemplate prompt implementation
 type PromptTemplate struct {
+	Prompt
 	// inputVariables A list of the names of the variables the prompt template expects.
 	inputVariables []string
 	// template The prompt template.
@@ -49,13 +50,17 @@ func (receiver *PromptTemplate) Format(ctx context.Context, inputVars map[string
 	if !checkValidTemplate() {
 		return ""
 	}
-
 	buf := &bytes.Buffer{}
 	if err := receiver.tpl.Execute(buf, inputVars); err != nil {
 		log.Fatal(err)
 		return ""
 	}
 	return buf.String()
+}
+
+// InputVars returns inputVariables
+func (receiver *PromptTemplate) InputVars(ctx context.Context) []string {
+	return receiver.inputVariables
 }
 
 // TODO

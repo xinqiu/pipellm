@@ -1,11 +1,11 @@
-# pipelang
+# Pipellam
 
-pipelang: Pipeline framework for large language models
+Pipellam: **Pipe**line Framework for **L**arge **La**nguage **M**odels
 
 ## Quick Install
 
 ```
-go get github.com/index-labs/pipelang
+go get github.com/index-labs/pipellam
 ```
 
 ## What is this?
