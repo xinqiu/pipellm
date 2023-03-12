@@ -1,6 +1,8 @@
 package llms
 
-import "context"
+import (
+	"context"
+)
 
 // BaseLLM is base LLM interface
 type BaseLLM interface {

@@ -10,13 +10,13 @@ import (
 
 	constantOpenAI "github.com/index-labs/pipelang/pkg/constants"
 	"github.com/index-labs/pipelang/pkg/types"
-	gogpt "github.com/sashabaranov/go-gpt3"
+	openai "github.com/sashabaranov/go-openai"
 )
 
 // LLM OpenAI implementation
 type LLM struct {
 	// ========== LLM Client ===========
-	client *gogpt.Client
+	client *openai.Client
 
 	// ========== Parameters =========
 	// modelName Model name to use.
@@ -63,7 +63,7 @@ func (receiver *LLM) Call(ctx context.Context, prompt string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	fmt.Printf("token_usage:%+v", result.LLMOutput.(*gogpt.CompletionResponse).Usage)
+	fmt.Printf("token_usage:%+v", result.LLMOutput.(*openai.CompletionResponse).Usage)
 
 	return result.Generations[0].Text, nil
 }
@@ -75,7 +75,7 @@ func (receiver *LLM) Generate(ctx context.Context, prompts []string) (*llms.LLMR
 		return nil, types.ErrNotImplemented
 	}
 
-	completionRequest := gogpt.CompletionRequest{
+	completionRequest := openai.CompletionRequest{
 		Model:       receiver.modelName,
 		Prompt:      strings.Join(prompts, "\n"),
 		MaxTokens:   receiver.maxTokens,
@@ -95,7 +95,7 @@ func (receiver *LLM) Generate(ctx context.Context, prompts []string) (*llms.LLMR
 	return receiver.createLLMResult(ctx, &resp), nil
 }
 
-func (receiver *LLM) createLLMResult(ctx context.Context, response *gogpt.CompletionResponse) *llms.LLMResult {
+func (receiver *LLM) createLLMResult(ctx context.Context, response *openai.CompletionResponse) *llms.LLMResult {
 	generatons := make([]*llms.Generation, 0)
 
 	for _, choice := range response.Choices {
@@ -120,7 +120,7 @@ func New(ctx context.Context) (*LLM, error) {
 	if apiKey == "" {
 		return nil, types.ErrNoAPIKey
 	}
-	client := gogpt.NewClient(apiKey)
+	client := openai.NewClient(apiKey)
 	llm := &LLM{client: client, openaiAPIKey: apiKey}
 
 	// init default parameters
@@ -131,7 +131,7 @@ func New(ctx context.Context) (*LLM, error) {
 // ======= Parameters Builder ========
 
 func (receiver *LLM) buildDefaultModelParams(ctx context.Context) {
-	receiver.modelName = gogpt.GPT3TextDavinci003
+	receiver.modelName = openai.GPT3TextDavinci003
 	receiver.temperature = 0.7
 	receiver.maxTokens = 256
 	receiver.topP = 1

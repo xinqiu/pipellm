@@ -29,7 +29,7 @@ func New(ctx context.Context, llm llms.LLM) interface{} {
 	}
 }
 
-// Run runs the pipeline
+// Run run pipeline implementation
 func (receiver *MapReduceLine) Run(ctx context.Context, document []*types.Document) (string, error) {
 	input := utils.MergeKVListToMap(receiver.prompt.InputVars(ctx), []string{document[0].PageContent})
 	result, err := receiver.llm.Call(ctx, receiver.prompt.Format(ctx, input))

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	gogpt "github.com/sashabaranov/go-gpt3"
+	gogpt "github.com/sashabaranov/go-openai"
 
 	"github.com/index-labs/pipelang/pkg/llms/openai"
 )
