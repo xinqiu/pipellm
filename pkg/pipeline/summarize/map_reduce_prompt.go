@@ -3,6 +3,8 @@ package summarize
 import (
 	"context"
 
+	"github.com/index-labs/pipelang/pkg/prompts/chatgpt"
+
 	"github.com/index-labs/pipelang/pkg/constants"
 	"github.com/index-labs/pipelang/pkg/llms"
 	"github.com/index-labs/pipelang/pkg/prompts"
@@ -24,7 +26,7 @@ func (receiver *MapReduceLine) Name() string {
 // New returns a new MapReduceLine
 func New(ctx context.Context, llm llms.LLM) interface{} {
 	return &MapReduceLine{
-		prompt: prompts.New(ctx, constants.SummarizeMapReducePromptInputVars, constants.SummarizeMapReducePromptTemplate),
+		prompt: chatgpt.New(ctx, constants.SummarizeMapReducePromptInputVars, constants.SummarizeMapReducePromptTemplate),
 		llm:    llm,
 	}
 }

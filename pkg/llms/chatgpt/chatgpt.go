@@ -11,11 +11,18 @@ import (
 	openai "github.com/sashabaranov/go-openai"
 )
 
+// ChatMessageRole represents roles
+const (
+	ChatMessageRoleUser      = "user"
+	ChatMessageRoleSystem    = "system"
+	ChatMessageRoleAssistant = "assistant"
+)
+
 // LLMChat chat model interface
 type LLMChat interface {
 	llms.BaseLLM
-	Call(ctx context.Context, message ...Message) (string, error)
-	Generate(ctx context.Context, message []Message) (*llms.LLMResult, error)
+	Call(ctx context.Context, message ...ChatMessage) (string, error)
+	Generate(ctx context.Context, message []ChatMessage) (*llms.LLMResult, error)
 }
 
 // ChatLLM OpenAI chatgpt implementation
@@ -35,11 +42,11 @@ func (receiver *ChatLLM) ModelName() string {
 	return "OpenAI ChatGPT"
 }
 
-// Message type of message
-type Message openai.ChatCompletionMessage
+// ChatMessage type of message
+type ChatMessage openai.ChatCompletionMessage
 
 // Call is the method to call OpenAI
-func (receiver *ChatLLM) Call(ctx context.Context, message ...Message) (string, error) {
+func (receiver *ChatLLM) Call(ctx context.Context, message ...ChatMessage) (string, error) {
 	result, err := receiver.Generate(ctx, message)
 	if err != nil {
 		return "", err
@@ -50,7 +57,7 @@ func (receiver *ChatLLM) Call(ctx context.Context, message ...Message) (string, 
 }
 
 // Generate OpenAI implementation
-func (receiver *ChatLLM) Generate(ctx context.Context, message []Message) (*llms.LLMResult, error) {
+func (receiver *ChatLLM) Generate(ctx context.Context, message []ChatMessage) (*llms.LLMResult, error) {
 	chatRequest := openai.ChatCompletionRequest{
 		Model:    receiver.modelName,
 		Messages: converChatGPTMessageTypeToOpenAIChatMessageType(message),
@@ -112,30 +119,30 @@ func (receiver *ChatLLM) WithModelName(modelName string) *ChatLLM {
 }
 
 // HumanMessage human message of ChatGPT message
-func HumanMessage(content string) Message {
-	return Message{
-		Role:    openai.ChatMessageRoleUser,
+func HumanMessage(content string) ChatMessage {
+	return ChatMessage{
+		Role:    ChatMessageRoleUser,
 		Content: content,
 	}
 }
 
 // SystemMessage system message of ChatGPT message
-func SystemMessage(content string) Message {
-	return Message{
-		Role:    openai.ChatMessageRoleSystem,
+func SystemMessage(content string) ChatMessage {
+	return ChatMessage{
+		Role:    ChatMessageRoleSystem,
 		Content: content,
 	}
 }
 
 // AssistantMessage assistant message of ChatGPT message
-func AssistantMessage(content string) Message {
-	return Message{
-		Role:    openai.ChatMessageRoleAssistant,
+func AssistantMessage(content string) ChatMessage {
+	return ChatMessage{
+		Role:    ChatMessageRoleAssistant,
 		Content: content,
 	}
 }
 
-func converChatGPTMessageTypeToOpenAIChatMessageType(messages []Message) []openai.ChatCompletionMessage {
+func converChatGPTMessageTypeToOpenAIChatMessageType(messages []ChatMessage) []openai.ChatCompletionMessage {
 	msgs := make([]openai.ChatCompletionMessage, 0)
 	for _, message := range messages {
 		msgs = append(msgs, openai.ChatCompletionMessage(message))

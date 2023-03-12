@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	chatgpt "github.com/index-labs/pipelang/pkg/llms/chatgpt"
+	"github.com/index-labs/pipelang/pkg/llms/chatgpt"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	messages := make([]chatgpt.Message, 0)
+	messages := make([]chatgpt.ChatMessage, 0)
 	messages = append(messages, chatgpt.SystemMessage("You are a helpful assistant that translates English to French."))
 	messages = append(messages, chatgpt.HumanMessage("Translate this sentence from English to French. I love programming."))
 
