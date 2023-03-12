@@ -44,7 +44,7 @@ func (receiver *ChatLLM) Call(ctx context.Context, message ...Message) (string, 
 	if err != nil {
 		return "", err
 	}
-	fmt.Printf("token_usage:%+v", result.LLMOutput.(*openai.ChatCompletionResponse).Usage)
+	fmt.Printf("token_usage:%+v\n", result.LLMOutput.(*openai.ChatCompletionResponse).Usage)
 
 	return result.Generations[0].Text, nil
 }
