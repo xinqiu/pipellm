@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/index-labs/pipelang/pkg/constants"
-	"github.com/index-labs/pipelang/pkg/llms/openai"
-	"github.com/index-labs/pipelang/pkg/loaders"
-	"github.com/index-labs/pipelang/pkg/pipeline/summarize"
+	"github.com/xinqiu/pipellm/pkg/constants"
+	"github.com/xinqiu/pipellm/pkg/llms/openai"
+	"github.com/xinqiu/pipellm/pkg/loaders"
+	"github.com/xinqiu/pipellm/pkg/pipeline/summarize"
 )
 
 func main() {

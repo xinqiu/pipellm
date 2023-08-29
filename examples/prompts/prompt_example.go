@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/index-labs/pipelang/pkg/prompts"
+	"github.com/xinqiu/pipellm/pkg/prompts"
 )
 
 func main() {

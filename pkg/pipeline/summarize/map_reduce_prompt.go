@@ -3,13 +3,13 @@ package summarize
 import (
 	"context"
 
-	"github.com/index-labs/pipelang/pkg/prompts/chatgpt"
+	"github.com/xinqiu/pipellm/pkg/prompts/chatgpt"
 
-	"github.com/index-labs/pipelang/pkg/constants"
-	"github.com/index-labs/pipelang/pkg/llms"
-	"github.com/index-labs/pipelang/pkg/prompts"
-	"github.com/index-labs/pipelang/pkg/types"
-	"github.com/index-labs/pipelang/pkg/utils"
+	"github.com/xinqiu/pipellm/pkg/constants"
+	"github.com/xinqiu/pipellm/pkg/llms"
+	"github.com/xinqiu/pipellm/pkg/prompts"
+	"github.com/xinqiu/pipellm/pkg/types"
+	"github.com/xinqiu/pipellm/pkg/utils"
 )
 
 // MapReduceLine pipeline implementation

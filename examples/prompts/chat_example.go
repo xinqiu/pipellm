@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	chatllm "github.com/index-labs/pipelang/pkg/llms/chatgpt"
-	"github.com/index-labs/pipelang/pkg/prompts/chatgpt"
+	chatllm "github.com/xinqiu/pipellm/pkg/llms/chatgpt"
+	"github.com/xinqiu/pipellm/pkg/prompts/chatgpt"
 )
 
 func main() {

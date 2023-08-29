@@ -3,7 +3,7 @@ package loaders
 import (
 	"context"
 
-	"github.com/index-labs/pipelang/pkg/types"
+	"github.com/xinqiu/pipellm/pkg/types"
 )
 
 // BaseLoader represents base loader interface

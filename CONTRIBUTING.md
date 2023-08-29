@@ -1,6 +1,6 @@
-# Contributing to pipelang
+# Contributing to pipellm
 
-Hi there! Thank you for even being interested in contributing to `pipelang`.
+Hi there! Thank you for even being interested in contributing to `pipellm`.
 As an open source project in a rapidly developing field, we are extremely open
 to contributions, whether it be in the form of a new feature, improved infra, or better documentation.
 
@@ -11,7 +11,7 @@ Please do not try to push directly to this repo unless you are maintainer.
 
 ### GitHub Issues
 
-Our [issues](https://github.com/index-labs/pipelang/issues) page is kept up to date
+Our [issues](https://github.com/xinqiu/pipellm/issues) page is kept up to date
 with bugs, improvements, and feature requests. There is a taxonomy of labels to help
 with sorting and discovery of issues of interest.
 

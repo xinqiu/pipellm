@@ -6,8 +6,8 @@ import (
 	"log"
 	tpl "text/template"
 
-	"github.com/index-labs/pipelang/pkg/llms/chatgpt"
-	"github.com/index-labs/pipelang/pkg/prompts"
+	"github.com/xinqiu/pipellm/pkg/llms/chatgpt"
+	"github.com/xinqiu/pipellm/pkg/prompts"
 )
 
 // ChatPromptTemplate prompt implementation

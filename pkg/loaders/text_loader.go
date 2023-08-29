@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/index-labs/pipelang/pkg/types"
+	"github.com/xinqiu/pipellm/pkg/types"
 )
 
 // TextLoader loader implementation

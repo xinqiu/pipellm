@@ -6,11 +6,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/index-labs/pipelang/pkg/llms"
+	"github.com/xinqiu/pipellm/pkg/llms"
 
-	constantOpenAI "github.com/index-labs/pipelang/pkg/constants"
-	"github.com/index-labs/pipelang/pkg/types"
 	openai "github.com/sashabaranov/go-openai"
+	constantOpenAI "github.com/xinqiu/pipellm/pkg/constants"
+	"github.com/xinqiu/pipellm/pkg/types"
 )
 
 // LLM OpenAI implementation

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/index-labs/pipelang/pkg/llms/chatgpt"
+	"github.com/xinqiu/pipellm/pkg/llms/chatgpt"
 )
 
 func main() {

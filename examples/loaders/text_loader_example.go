@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/index-labs/pipelang/pkg/loaders"
+	"github.com/xinqiu/pipellm/pkg/loaders"
 )
 
 func main() {

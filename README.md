@@ -1,11 +1,11 @@
-# Pipellam
+# Pipellm
 
-Pipellam: **Pipe**line Framework for **L**arge **La**nguage **M**odels
+Pipellm: **Pipe**line Framework for **L**arge **L**anguage **M**odels
 
 ## Quick Install
 
 ```
-go get github.com/index-labs/pipellam
+go get github.com/xinqiu/pipellm
 ```
 
 ## What is this?

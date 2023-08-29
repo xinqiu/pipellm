@@ -7,7 +7,7 @@ import (
 
 	gogpt "github.com/sashabaranov/go-openai"
 
-	"github.com/index-labs/pipelang/pkg/llms/openai"
+	"github.com/xinqiu/pipellm/pkg/llms/openai"
 )
 
 func main() {
